@@ -75,12 +75,10 @@
   .btn.primary{background:var(--accent);border-color:var(--accent);color:#04121c}
   .btn:disabled{opacity:.65;cursor:default;transform:none}
 
-  #updateBanner{position:fixed;right:16px;top:64px;z-index:50;display:flex;align-items:center;gap:10px;max-width:min(400px,calc(100vw - 32px));background:#0e2a3d;border:1px solid var(--accent);border-radius:12px;padding:10px 14px;box-shadow:0 8px 30px rgba(0,0,0,.5);animation:bannerIn .25s ease}
-  @keyframes bannerIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
-  #updateBanner span{font-size:.85rem}
-  #updateBanner button{cursor:pointer;border:0;border-radius:8px;padding:6px 12px;font-weight:600}
-  #updateBanner .reload{background:var(--accent);color:#04121c}
-  #updateBanner .close{background:transparent;color:var(--muted)}
+  nav .wrap{position:relative}
+  #updateChip{position:absolute;right:12px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;background:#0e2a3d;border:1px solid var(--accent);color:var(--accent);border-radius:999px;padding:5px 13px;font-size:.8rem;font-weight:700;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.45);animation:pulseChip 2s infinite}
+  #updateChip:hover{background:var(--accent);color:#04121c}
+  @keyframes pulseChip{0%,100%{box-shadow:0 0 0 0 rgba(56,189,248,.35)}50%{box-shadow:0 0 0 7px rgba(56,189,248,0)}}
 
   .app-grid{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:start}
   .qr-box{background:#fff;border-radius:16px;padding:14px;width:fit-content}
@@ -114,11 +112,6 @@
   </div>
 </header>
 
-<div id="updateBanner" hidden>
-  <span>🆕 De nouvelles news sont disponibles !</span>
-  <button class="reload">Actualiser</button>
-  <button class="close">✕</button>
-</div>
 
 <nav>
   <div class="wrap">
@@ -133,6 +126,7 @@
       <li><a href="#suivre">À surveiller</a></li>
       <li><a href="#app">📱 Application</a></li>
     </ul>
+    <button id="updateChip" hidden title="De nouvelles news sont disponibles — cliquer pour actualiser">🆕 Nouveautés</button>
   </div>
 </nav>
 

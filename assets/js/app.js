@@ -46,7 +46,7 @@
 
   /* ---------- Alertes nouvelles news ---------- */
   var notifBtn = document.getElementById('notifBtn');
-  var banner = document.getElementById('updateBanner');
+  var chip = document.getElementById('updateChip');
 
   function refreshNotifBtn() {
     if (!notifBtn) return;
@@ -86,27 +86,19 @@
     }
   }
 
-  var bannerTimer = null;
-  function showBanner(text) {
-    if (!banner) return;
-    banner.querySelector('span').textContent = text;
-    banner.hidden = false;
-    /* disparaît seule après 15 s pour ne pas gêner la navigation ;
-       reviendra au prochain passage si la MAJ n'a pas été vue */
-    if (bannerTimer) clearTimeout(bannerTimer);
-    bannerTimer = setTimeout(function () { banner.hidden = true; }, 15000);
+  /* Petit bouton « 🆕 Nouveautés » dans la barre de navigation :
+     intégré à la barre, il ne masque jamais le contenu. */
+  function showChip(text) {
+    if (!chip) return;
+    if (text) chip.title = text + ' — cliquer pour actualiser';
+    chip.hidden = false;
   }
 
-  if (banner) {
-    banner.querySelector('button.reload').addEventListener('click', function () {
-      var seen = banner.getAttribute('data-latest');
+  if (chip) {
+    chip.addEventListener('click', function () {
+      var seen = chip.getAttribute('data-latest');
       if (seen) localStorage.setItem('newsinfo.lastSeen', seen);
       location.reload();
-    });
-    banner.querySelector('button.close').addEventListener('click', function () {
-      var seen = banner.getAttribute('data-latest');
-      if (seen) localStorage.setItem('newsinfo.lastSeen', seen);
-      banner.hidden = true;
     });
   }
 
@@ -118,8 +110,8 @@
         var last = localStorage.getItem('newsinfo.lastSeen');
         if (!last) { localStorage.setItem('newsinfo.lastSeen', stamp); return; }
         if (last !== stamp) {
-          if (banner) banner.setAttribute('data-latest', stamp);
-          showBanner('🆕 ' + (info.titre || 'De nouvelles news sont disponibles !'));
+          if (chip) chip.setAttribute('data-latest', stamp);
+          showChip(info.titre || 'De nouvelles news sont disponibles !');
           if (!silent) notify('News Informatique', info.titre || 'De nouvelles news sont disponibles !');
         }
       })
