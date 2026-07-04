@@ -1,22 +1,30 @@
-# Site News Informatique — récap hebdo hardware
+# Site News Informatique — récap hardware quotidien + application (PWA)
 
-Page d'accueil statique (HTML/CSS pur, aucune dépendance) présentant le récapitulatif
-des actualités hardware de la semaine. Édition courante : **Semaine 26 (22–28 juin 2026)**.
+Site statique + application web progressive (PWA) présentant le récapitulatif des
+actualités hardware, mis à jour **chaque jour** par un agent Claude planifié.
+
+- 🌐 **Site en ligne (gratuit, GitHub Pages)** : https://bredouan06400-jpg.github.io/news-informatique/
+- 📦 **Dépôt** : https://github.com/bredouan06400-jpg/news-informatique
+- 📱 **Application iOS/Android** : c'est le même site, installable (PWA) — QR code dans
+  la section « Application mobile » de la page (`assets/qr/qr-app.png`).
+- 🔔 **Alertes** : `data/latest.json` sert de signal ; l'app affiche une bannière +
+  notification quand une nouvelle édition/mise à jour est publiée.
 
 ## Structure
 
 Emplacement du projet : `F:\Projet info IA\Projet site web AI claude\`
 
 ```
-Projet site web AI claude/
-├── index.html          ← page d'accueil (édition de la semaine)
+Projet site web AI claude/          (= dépôt Git → GitHub Pages)
+├── index.html            ← page d'accueil (édition de la semaine en cours)
+├── manifest.webmanifest  ← manifeste PWA (nom, icônes, couleurs)
+├── sw.js                 ← service worker (hors-ligne + cache) ; VERSION à incrémenter à chaque MAJ
+├── data/latest.json      ← signal d'alerte « nouvelles news » lu par l'application
 ├── assets/
-│   └── img/            ← images téléchargées depuis les sources (crédits en légende)
-│       ├── gpu_rtx50_computex.jpg    (NVIDIA — RTX 50 partenaires, Computex 2026)
-│       ├── cpu_5800x3d.jpg           (Tom's Hardware — Ryzen 7 5800X3D)
-│       ├── ram_ddr5_prix.jpg         (HardwareCooking — DDR5)
-│       └── ecran_rog_pg32ucwm.png    (ASUS — ROG Swift OLED PG32UCWM)
-└── archives/           ← anciennes éditions (index.html renommé en AAAA-SNN.html)
+│   ├── js/app.js         ← installation PWA, bannière et notifications
+│   ├── qr/qr-app.png     ← QR code d'installation (pointe vers le site en ligne)
+│   └── img/              ← icônes de l'app + images des news (crédits en légende)
+└── archives/             ← anciennes éditions (AAAA-SNN.html)
 ```
 
 ## Ouvrir le site
@@ -27,6 +35,13 @@ Double-cliquer sur `index.html` (tout fonctionne en local), ou servir le dossier
 & "G:\Projet jeux\Moteur Graphique\UE_5.8\Engine\Binaries\ThirdParty\Python3\Win64\python.exe" -m http.server 8787 --directory "F:\Projet info IA\Projet site web AI claude"
 # puis ouvrir http://localhost:8787
 ```
+
+## Publication
+
+Chaque `git push` sur `main` redéploie automatiquement le site sur GitHub Pages (~1 min).
+L'agent planifié « maj-hebdo-site-news-informatique » (tous les jours ~9h, application
+Claude ouverte) fait tout : collecte, mise à jour, `latest.json`, bump de version du
+service worker, commit et push.
 
 ## Mise à jour hebdomadaire (procédure)
 

@@ -86,10 +86,15 @@
     }
   }
 
+  var bannerTimer = null;
   function showBanner(text) {
     if (!banner) return;
     banner.querySelector('span').textContent = text;
     banner.hidden = false;
+    /* disparaît seule après 15 s pour ne pas gêner la navigation ;
+       reviendra au prochain passage si la MAJ n'a pas été vue */
+    if (bannerTimer) clearTimeout(bannerTimer);
+    bannerTimer = setTimeout(function () { banner.hidden = true; }, 15000);
   }
 
   if (banner) {

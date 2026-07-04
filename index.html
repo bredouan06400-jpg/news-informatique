@@ -75,8 +75,9 @@
   .btn.primary{background:var(--accent);border-color:var(--accent);color:#04121c}
   .btn:disabled{opacity:.65;cursor:default;transform:none}
 
-  #updateBanner{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:12px;max-width:92vw;background:#0e2a3d;border:1px solid var(--accent);border-radius:12px;padding:12px 16px;box-shadow:0 8px 30px rgba(0,0,0,.5)}
-  #updateBanner span{font-size:.9rem}
+  #updateBanner{position:fixed;right:16px;top:64px;z-index:50;display:flex;align-items:center;gap:10px;max-width:min(400px,calc(100vw - 32px));background:#0e2a3d;border:1px solid var(--accent);border-radius:12px;padding:10px 14px;box-shadow:0 8px 30px rgba(0,0,0,.5);animation:bannerIn .25s ease}
+  @keyframes bannerIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+  #updateBanner span{font-size:.85rem}
   #updateBanner button{cursor:pointer;border:0;border-radius:8px;padding:6px 12px;font-weight:600}
   #updateBanner .reload{background:var(--accent);color:#04121c}
   #updateBanner .close{background:transparent;color:var(--muted)}
@@ -90,7 +91,12 @@
   .store-cards .os{font-size:1.4rem}
   @media (max-width:720px){ .app-grid{grid-template-columns:1fr} .qr-box{margin:0 auto} }
 
-  @media (max-width:820px){ .cat{grid-template-columns:1fr} header h1{font-size:1.5rem} }
+  @media (max-width:820px){
+    .cat{grid-template-columns:1fr} header h1{font-size:1.5rem}
+    nav ul{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+    nav ul::-webkit-scrollbar{display:none}
+    nav a{white-space:nowrap}
+  }
 </style>
 </head>
 <body>
