@@ -39,10 +39,18 @@ Double-cliquer sur `index.html` (tout fonctionne en local), ou servir le dossier
 ## Publication
 
 Chaque `git push` sur `main` redéploie automatiquement le site sur GitHub Pages (~1 min).
-L'agent planifié « maj-hebdo-site-news-informatique » (**tous les 3 jours** à ~9h, application
-Claude ouverte) fait tout : collecte, mise à jour, `latest.json`, bump de version du
-service worker, commit et push. L'archivage de la semaine finie se fait au premier
-passage de l'agent après le dimanche.
+
+**Robot autonome (GitHub Actions)** — `.github/workflows/update-news.yml` : tous les
+3 jours à 7h UTC (9h Paris l'été), GitHub exécute `scripts/update_news.py` **dans le
+cloud, sans PC ni Claude** : lecture des flux RSS des sources, filtrage hardware des
+3-4 derniers jours, régénération de la section « ⚡ Dernières actualités » d'index.html
+(entre les marqueurs `AUTO-NEWS-START/END`), mise à jour de `data/latest.json` (alerte
+PWA) et de la version du service worker, puis commit + push. Lancement manuel possible
+depuis l'onglet Actions du dépôt (« Run workflow »).
+
+**Sections éditoriales** (À la une, GPU, CPU…) : enrichies à la demande via Claude Code
+(« mets à jour le site news ») ; la tâche planifiée Claude
+« maj-hebdo-site-news-informatique » existe toujours mais est **en pause**.
 
 ## Mise à jour hebdomadaire (procédure)
 
