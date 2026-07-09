@@ -39,9 +39,10 @@ Double-cliquer sur `index.html` (tout fonctionne en local), ou servir le dossier
 ## Publication
 
 Chaque `git push` sur `main` redéploie automatiquement le site sur GitHub Pages (~1 min).
-L'agent planifié « maj-hebdo-site-news-informatique » (tous les jours ~9h, application
+L'agent planifié « maj-hebdo-site-news-informatique » (**tous les 3 jours** à ~9h, application
 Claude ouverte) fait tout : collecte, mise à jour, `latest.json`, bump de version du
-service worker, commit et push.
+service worker, commit et push. L'archivage de la semaine finie se fait au premier
+passage de l'agent après le dimanche.
 
 ## Mise à jour hebdomadaire (procédure)
 
