@@ -1,7 +1,7 @@
 /* Service worker — News Informatique
    IMPORTANT : incrémenter VERSION à chaque mise à jour du contenu
    (l'agent quotidien s'en charge). */
-const VERSION = '2026-S44-auto20261101T1404';
+const VERSION = '2026-S45-auto20261104T1509';
 const CACHE = 'news-info-' + VERSION;
 
 const PRECACHE = [
